@@ -1,0 +1,22 @@
+{
+  "name": "devweb-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valterlucena/devweb-back.git"
+  },
+  "author": "Valter Lucena",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valterlucena/devweb-back/issues"
+  },
+  "homepage": "https://github.com/valterlucena/devweb-back#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
