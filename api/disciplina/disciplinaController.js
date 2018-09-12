@@ -1,21 +1,44 @@
 'use strict';
 
+const Disciplina = require('./disciplinaModel');
+
 exports.listaDisciplinas = function (req, res) {
-  res.send('todas as disciplinas');
+  Disciplina.find((err, disciplina) => {
+    if (err)
+      res.send(err);
+    res.json(disciplina);
+  });
 };
 
 exports.criaDisciplina = function (req, res) {
-  res.send('cria uma nova disciplina');
+  const nova = new Disciplina(req.body);
+  nova.save((err, disciplina) => {
+    if (err) 
+      res.send(err);
+    res.json(disciplina);
+  });
 };
 
 exports.getDisciplina = function (req, res) {
-  res.send('retorna a disciplina solicitada');
+  Disciplina.findById(req.params.disciplinaId, (err, disciplina) => {
+    if (err)
+      res.send(err);
+    res.json(disciplina);
+  });
 };
 
 exports.atualizaDisciplina = function (req, res) {
-  res.send('edita uma disciplina existente');
+  Disciplina.findByIdAndUpdate(req.params.disciplinaId, (err, disciplina) => {
+    if (err)
+      res.send(err);
+    res.json(disciplina);
+  });
 };
 
 exports.deletaDisciplina = function (req, res) {
-  res.send('deleta uma disciplina especifica');
+  Disciplina.findByIdAndRemove(req.params.disciplinaId, (err, disciplina) => {
+    if (err)
+      res.send(err);
+    res.json({mensagem: "deu tudo certo"});
+  });
 };
