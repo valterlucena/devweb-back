@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * @swagger
+ * resourcePath: /api
+ * description: All about API
+ */
+
 module.exports = function (app) {
   var quizz = require('../controllers/quizzController');
 
@@ -13,3 +19,15 @@ module.exports = function (app) {
     .delete(quizz.deletaCard);
 
 }
+
+/**
+ * @swagger
+ * models:
+ *   User:
+ *     id: User
+ *     properties:
+ *       username:
+ *         type: String
+ *       password:
+ *         type: String
+ */
