@@ -1,20 +1,19 @@
-const express = require('express'),
+const express  = require('express'),
     bodyParser = require('body-parser'),
-    morgan = require('morgan'),
-    fs = require('fs'),
-    path = require('path'),
-    app = express(),
-    port = process.env.PORT || 3000,
-    cache = require('memory-cache'),
-    swagger = require('swagger-express'),
-    mongoose = require('mongoose');
+    morgan     = require('morgan'),
+    fs         = require('fs'),
+    path       = require('path'),
+    app        = express(),
+    port       = process.env.PORT || 3000,
+    cache      = require('memory-cache'),
+    swagger    = require('swagger-express'),
+    mongoose   = require('mongoose');
 
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 app.use(morgan('tiny', { stream: accessLogStream }))
 
 app.use('/static', express.static(__dirname + '/static'))
-
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use(swagger.init(app, {
@@ -24,11 +23,15 @@ app.use(swagger.init(app, {
     swaggerJSON: '/api-docs.json',
     swaggerUI: './public/swagger',
     basePath: 'http://localhost:3000',
-    apis: ['./api/routes/quizzRoutes.js']
+    apis: ['./api/quizz/quizzRoutes.js']
 }));
 
-let routes = require('./api/routes/quizzRoutes');
-routes(app);
+let quizz      = require('./api/quizz/quizzRoutes'),
+    disciplina = require('./api/disciplina/disciplinaRoutes');
+
+quizz(app);
+disciplina(app);
+
 
 mongoose.connect('mongodb://localhost/test');
 
@@ -63,33 +66,33 @@ app.use('/', function (req, res, next) {
     next();
 })
 
-app.post('/', function (req, res) {
-    res.end(JSON.stringify(req.body, null, 2))
-})
+// app.post('/', function (req, res) {
+//     res.end(JSON.stringify(req.body, null, 2))
+// })
 
-app.get('/', (req, res) => {
-    res.send(JSON.stringify({ mensagem: 'olar' }));
-})
+// app.get('/', (req, res) => {
+//     res.send(JSON.stringify({ mensagem: 'olar' }));
+// })
 
-app.get('/disciplina/:id', (req, res) => {
-    res.send(JSON.stringify({ cod: 123, nome: 'webdev' }))
-})
+// app.get('/disciplina/:id', (req, res) => {
+//     res.send(JSON.stringify({ cod: 123, nome: 'webdev' }))
+// })
 
-app.post('/disciplina/:id/atividade', (req, res) => {
-    res.send(JSON.stringify({ cod: 789, descricao: 'atividade' }))
-})
+// app.post('/disciplina/:id/atividade', (req, res) => {
+//     res.send(JSON.stringify({ cod: 789, descricao: 'atividade' }))
+// })
 
-app.get('/disciplina/:id/atividade', (req, res) => {
-    res.send(JSON.stringify([{ cod: 123, nome: 'web' }, { cod: 234, nome: 'dev' }]))
-})
+// app.get('/disciplina/:id/atividade', (req, res) => {
+//     res.send(JSON.stringify([{ cod: 123, nome: 'web' }, { cod: 234, nome: 'dev' }]))
+// })
 
-app.get('/disciplina/:id/atividade/:id', (req, res) => {
-    res.send(JSON.stringify({ cod: 456, descricao: 'atividade' }))
-})
+// app.get('/disciplina/:id/atividade/:id', (req, res) => {
+//     res.send(JSON.stringify({ cod: 456, descricao: 'atividade' }))
+// })
 
-app.put('/disciplina/:id/atividade/:id', (req, res) => {
-    res.send(JSON.stringify({ cod: 12, descricao: 'atividade respondida/editada' }))
-})
+// app.put('/disciplina/:id/atividade/:id', (req, res) => {
+//     res.send(JSON.stringify({ cod: 12, descricao: 'atividade respondida/editada' }))
+// })
 
 app.listen(port, () => console.log(`App running on port ${port}`))
 

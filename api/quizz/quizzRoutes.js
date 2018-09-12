@@ -7,7 +7,7 @@
  */
 
 module.exports = function (app) {
-  var quizz = require('../controllers/quizzController');
+  var quizz = require('./quizzController');
 
   app.route('/cards')
     .get(quizz.listaCards)
@@ -19,15 +19,3 @@ module.exports = function (app) {
     .delete(quizz.deletaCard);
 
 }
-
-/**
- * @swagger
- * models:
- *   User:
- *     id: User
- *     properties:
- *       username:
- *         type: String
- *       password:
- *         type: String
- */
