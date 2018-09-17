@@ -5,4 +5,4 @@ const QuizzSchema = new Schema({
     cards: String,
 });
 
-module.exports = mongoose.model('Disciplina', DisciplinaSchema);
+module.exports = mongoose.model('Quizz', QuizzSchema);

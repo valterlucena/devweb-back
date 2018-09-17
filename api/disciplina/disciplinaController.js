@@ -28,7 +28,7 @@ exports.getDisciplina = function (req, res) {
 };
 
 exports.atualizaDisciplina = function (req, res) {
-  Disciplina.findByIdAndUpdate(req.params.disciplinaId, (err, disciplina) => {
+  Disciplina.findByIdAndUpdate(req.params.disciplinaId, req.body, {new: true}, (err, disciplina) => {
     if (err)
       res.send(err);
     res.json(disciplina);
