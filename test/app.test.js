@@ -10,6 +10,19 @@ describe('Test GET disciplina', () => {
     .end((err, res) => {
       expect('Content-Type', /json/);
       expect(res.statusCode).to.be.equal(200);
+      expect(res.body).to.be.equal([]);
+    });
+  });
+});
+
+describe('Test GET quizz', () => {
+  it('deve retornar todos', () => {
+    request(app)
+    .get('/cards')
+    .end((err, res) => {
+      expect('Content-Type', /json/);
+      expect(res.statusCode).to.be.equal(200);
+      expect(res.body).to.be.equal([]);
     });
   });
 });
