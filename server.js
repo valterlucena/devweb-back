@@ -37,11 +37,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //     }
 // ));
 
-let quizz      = require('./api/quizz/quizzRoutes'),
-    disciplina = require('./api/disciplina/disciplinaRoutes');
+let cards      = require('./src/cards/cardsRoutes'),
+    disciplina = require('./src/disciplina/disciplinaRoutes'),
+    usuario    = require('./src/usuario/usuarioRoutes');
 
-quizz(app);
+cards(app);
 disciplina(app);
+usuario(app);
 swagger(app);
 
 mongoose.Promise = Promise;

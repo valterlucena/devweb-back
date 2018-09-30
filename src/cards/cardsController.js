@@ -1,9 +1,9 @@
 'use strict';
 
-const Quizz = require('./quizzModel');
+const Cards = require('./cardsModel');
 
 exports.listaCards = function (req, res, next) {
-  Quizz.find((err, cards) => {
+  Cards.find((err, cards) => {
     if (err)
       next(err);
     res.status(200).json(cards);
@@ -11,7 +11,7 @@ exports.listaCards = function (req, res, next) {
 };
 
 exports.criaCard = function (req, res, next) {
-  const novo = new Quizz(req.body);
+  const novo = new Cards(req.body);
   novo.save((err, cards) => {
     if (err)
       next(err);
@@ -20,7 +20,7 @@ exports.criaCard = function (req, res, next) {
 };
 
 exports.getCard = function (req, res, next) {
-  Quizz.findById(req.params.cardId, (err, card) => {
+  Cards.findById(req.params.cardId, (err, card) => {
     if (err)
       next(err);
     res.status(200).json(card);
@@ -28,7 +28,7 @@ exports.getCard = function (req, res, next) {
 };
 
 exports.atualizaCard = function (req, res, next) {
-  Quizz.findByIdAndUpdate(req.params.cardId, req.body, {new: true}, (err, card) => {
+  Cards.findByIdAndUpdate(req.params.cardId, req.body, {new: true}, (err, card) => {
     if (err)
       next(err);
     res.status(200).json(card);
@@ -36,7 +36,7 @@ exports.atualizaCard = function (req, res, next) {
 };
 
 exports.deletaCard = function (req, res, next) {
-  Quizz.findByIdAndDelete(req.params.cardId, (err, card) => {
+  Cards.findByIdAndDelete(req.params.cardId, (err, card) => {
     if (err)
       next(err);
     res.status(200).json({mensagem: "deletou toda"});

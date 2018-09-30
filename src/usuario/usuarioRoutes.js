@@ -9,7 +9,7 @@ module.exports = function (app) {
 
   app.route('/usuario/:usuarioId')
     .get(usuario.getUsuario)
-    .put(Usuario.atualizaUsuario)
+    .put(usuario.atualizaUsuario)
     .delete(usuario.deletaUsuario);
 
 }
