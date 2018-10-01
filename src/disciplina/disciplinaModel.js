@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const DisciplinaSchema = new Schema({
-    codigo: String,
-    nome: String,
+    nome: {
+        type: String,
+        required: true
+    },
     descricao: String
 });
 
