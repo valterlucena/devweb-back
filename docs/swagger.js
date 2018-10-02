@@ -6,7 +6,7 @@ const swaggerDef = {
     'info': {
         'description': 'aprenda num flash com o Flexes',
         'title': 'Flexes',
-        'version': '1.0'
+        'version': '1.0.0'
     }
 };
 
