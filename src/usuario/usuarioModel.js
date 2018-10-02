@@ -12,7 +12,8 @@ const UsuarioSchema = new Schema({
     },
     type: {
         type: String,
-        required: true
+        required: true,
+        enum: ['aluno', 'professor']
     },
     disciplinas: [Schema.Types.ObjectId]
 });
