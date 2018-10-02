@@ -16,18 +16,18 @@ describe('Test GET cards', () => {
 
 describe('Test POST cards', () => {
   it('deve retornar uma lista de cards criada corretamente', () => {
-    const cards = {cards: [{
-      termo: 'termo',
-      definicao: 'definicao'
-    }]};
+    const cards = {
+      termos: ['termo1', 'termo2'],
+      definicoes: ['definicao1', 'definicao2']
+    };
     request(app)
     .post('/cards')
     .send(cards)
     .end((err, res) => {
       expect('Content-Type', /json/);
       expect(res.statusCode).to.be.equal(201);
-      expect(res.body[0].termo).to.be.equal('termo');
-      expect(res.body[0].definicao).to.be.equal('definicao');
+      expect(res.body.termos).to.be.eql(['termo1', 'termo2']);
+      expect(res.body.definicoes).to.be.eql(['definicao1', 'definicao2']);
     });
   });
 });
