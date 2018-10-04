@@ -1,6 +1,8 @@
 'use strict';
 
 const Usuario = require('./usuarioModel');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 exports.listaUsuarios = function (req, res, next) {
   Usuario.find((err, usuario) => {
@@ -11,12 +13,16 @@ exports.listaUsuarios = function (req, res, next) {
 };
 
 exports.criaUsuario = function (req, res, next) {
-  const nova = new Usuario(req.body);
-  nova.save((err, usuario) => {
-    if (err) 
-      next(err);
-    res.status(201).json(usuario);
-  });
+  const key = req.body.password;
+  bcrypt.hash(key, saltRounds, (err, hash) => {
+    req.body.password = hash;
+    const novo = new Usuario(req.body);
+    novo.save((err, usuario) => {
+      if (err) 
+        next(err);
+      res.status(201).json(usuario);
+    });
+  });  
 };
 
 exports.getUsuario = function (req, res, next) {
