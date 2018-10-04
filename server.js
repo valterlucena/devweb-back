@@ -6,9 +6,10 @@ const express   = require('express'),
     app         = express(),
     port        = process.env.PORT || 3000,
     swagger     = require('./docs/docsRoutes'),
-    mongoose    = require('mongoose');
-    // cors        = require('cors'),
-    // passport    = require('passport'),
+    mongoose    = require('mongoose'),
+    cors        = require('cors'),
+    autenticacao = require('./src/autenticacao/autenticacao');
+    // passport    = require('passport');
     // session     = require('express-session'),
     // LocalStrategy = require('passport-local').Strategy;
 
@@ -20,8 +21,7 @@ app.use('/static', express.static(__dirname + '/static'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// comentado pra usar firebase mais a frente
-// app.use(cors());
+app.use(cors());
 
 // app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false}));
 // app.use(passport.initialize());
@@ -45,6 +45,7 @@ cards(app);
 disciplina(app);
 usuario(app);
 swagger(app);
+autenticacao(app);
 
 mongoose.Promise = Promise;
 mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
