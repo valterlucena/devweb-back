@@ -8,14 +8,12 @@ module.exports = (app) => {
         .post(function(req, res) {
             Usuario.findOne({
                 username: req.body.username
-            }), function(err, usuario) {
-                console.log(usuario);
+            }, function(err, usuario) {
                 if (err) throw err;
                 if (!usuario) {
                     res.json({success: false, message: 'Auth failed. User not found'});
                 } else if (usuario) {
-                    console.log('oi');
-                    if (usuario.password != res.body.password) {
+                    if (usuario.password != req.body.password) {
                         res.json({success: false, message: 'Auth failed. Wrong password'});
                     } else {
                         const payload = {
@@ -23,7 +21,7 @@ module.exports = (app) => {
                         };
 
                         var token = jwt.sign(payload, config.secret, {
-                            expiresInMinutes: 1440
+                            expiresIn: 3600
                         });
 
                         res.json({
@@ -33,6 +31,6 @@ module.exports = (app) => {
                         });
                     }
                 }
-            }
+            });
         });
 };
