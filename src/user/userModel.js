@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
-const UsuarioSchema = new Schema({
+const UserSchema = new Schema({
     username: {
         type: String,
         required: true,
@@ -33,7 +33,7 @@ const UsuarioSchema = new Schema({
     }
 });
 
-UsuarioSchema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
     const user = this;
     if (!user.isModified('password')) {
         return next();
@@ -46,10 +46,10 @@ UsuarioSchema.pre('save', function (next) {
     });
 });
 
-UsuarioSchema.method({
+UserSchema.method({
     comparePassword (reqPassword, userPassword) {
         return bcrypt.compareSync(reqPassword, userPassword)
     }
 });
 
-module.exports = mongoose.model('Usuario', UsuarioSchema);
+module.exports = mongoose.model('User', UserSchema);
