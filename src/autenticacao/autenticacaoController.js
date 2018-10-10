@@ -8,8 +8,6 @@ exports.login = (req, res, next) => {
     Usuario.findOne({
         username: req.body.username
     }).then((user) => {
-        console.log('achei');
-        console.log(user);
         if (!user) {
             return res.json({success: false, message: 'Authentication failed. User not found. '});
         } else if (user) {
@@ -25,8 +23,39 @@ exports.login = (req, res, next) => {
         }
     })
     .catch((err) => {
-        console.log(err);
         return res.json({success: false, message: 'Something went wrong. Try again', error: err.message});
     })
 }
 
+exports.authenticate = (req, res, next) => {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        try {
+            const data = jwt.verify(token, config.secret);
+            if (data) {
+                req.username = data.username;
+                next();
+            } else {
+                return res.json({ 'message':'Failed to decode. Wrong token.' });
+            }
+        } catch (error) {
+            return res.status(401).json({ 'message':'Something went wrong, try again.', 'error': error.message });
+        }
+    } else {
+        return res.status(401).json({ 'message':'Failed to authenticate. Unreachable token.' });
+    }
+}
+
+exports.authorizeByUser = (req, res, next) => {
+    const username = req.username;
+    if (username) {
+        const reqUser = req.params.username;
+        if (username === reqUser) {
+            next();
+        } else {
+            res.status(401).send();
+        }
+    } else {
+        res.status(400).send();
+    }
+}
