@@ -73,7 +73,81 @@ const swaggerDef = {
                 ], 
                 'responses': {
                     '201': {
-                        'description': "{'resul': {New Usuario}}"
+                        'description': "{'result': {New user created}}"
+                    }
+                }
+            }
+        },
+        '/usuario/{username}': {
+            'get': {
+                'tags': [
+                    'Usuario'
+                ],
+                'summary': 'Get user by username',
+                'parameters': [
+                    {
+                        'name': 'username',
+                        'in': 'path',
+                        'description': 'username of the user we want to find',
+                        'required': true,
+                        'type': 'string'
+                    }
+                ],
+                'responses': {
+                    '200': {
+                        'description': 'The user was found',
+                        'schema': {
+                            '$ref': "#/definitions/Usuario"
+                        }
+                    }
+                }
+            },
+            'put': {
+                'tags': [
+                    'Usuario'
+                ],
+                'summary': 'Update user with given username',
+                'parameters': [
+                    {
+                        'name': 'username',
+                        'in': 'path',
+                        'description': 'username of the user we want to update',
+                        'required': true,
+                        'type': 'string'
+                    },
+                    {
+                        'name': 'usuario',
+                        'in': 'body',
+                        'description': 'user with updated properties',
+                        'required': false,
+                        'schema': {
+                            '$ref': '#definitions/Usuario'
+                        }
+                    }
+                ],
+                'responses': {
+                    '200': {
+                        'description': "{'result': {User updated}}"
+                    }
+                }
+            },
+            'delete': {
+                'tags': [
+                    'Usuario'
+                ],
+                'summary': 'Delete user with given username',
+                'parameters': [
+                    {
+                        'name': 'username',
+                        'in': 'path',
+                        'description': 'username of the user we want to delete',
+                        'required': true,
+                        'type': 'string'
+                    }
+                ],
+                'responses': {
+                    '200': {
+                        'description': "{'message': {User deleted}}"
                     }
                 }
             }
