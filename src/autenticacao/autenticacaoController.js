@@ -1,11 +1,11 @@
 'use strict';
 
 const jwt = require('jsonwebtoken');
-const Usuario = require('../usuario/usuarioModel');
+const User = require('../user/userModel');
 const config = require('../../config/secret');
 
 exports.login = (req, res, next) => {
-    Usuario.findOne({
+    User.findOne({
         username: req.body.username
     }).then((user) => {
         if (!user) {

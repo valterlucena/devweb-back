@@ -22,21 +22,21 @@ const swaggerDef = {
         '/usuario': {
             'get': {
                 'tags': [
-                    'Usuario'
+                    'User'
                 ],
                 'summary': 'Get all users',
                 'responses': {
                     '200': {
                         'description': 'OK',
                         'schema': {
-                            '$ref': '#/definitions/Usuario'
+                            '$ref': '#/definitions/User'
                         }
                     }
                 }
             },
             'post': {
                 'tags': [
-                    'Usuario'
+                    'User'
                 ],
                 'summary': 'Create a new user',
                 'parameters': [
@@ -46,7 +46,7 @@ const swaggerDef = {
                         'description': 'Username of the user that we want to create.',
                         'required': true,
                         'schema': {
-                            '$ref': '#/definitions/Usuario'
+                            '$ref': '#/definitions/User'
                         }
                     },
                     {
@@ -55,7 +55,7 @@ const swaggerDef = {
                         'description': 'Password of the user that we want to create.',
                         'required': true,
                         'schema': {
-                            '$ref': '#/definitions/Usuario'
+                            '$ref': '#/definitions/User'
                         }
                     },
                     {
@@ -64,7 +64,7 @@ const swaggerDef = {
                         'description': "Type of the user that we want to create. It can be 'aluno' or 'professor'",
                         'required': true,
                         'schema': {
-                            '$ref': '#/definitions/Usuario'
+                            '$ref': '#/definitions/User'
                         }
                     }
                 ],
@@ -81,7 +81,7 @@ const swaggerDef = {
         '/usuario/{username}': {
             'get': {
                 'tags': [
-                    'Usuario'
+                    'User'
                 ],
                 'summary': 'Get user by username',
                 'parameters': [
@@ -97,14 +97,14 @@ const swaggerDef = {
                     '200': {
                         'description': 'The user was found',
                         'schema': {
-                            '$ref': "#/definitions/Usuario"
+                            '$ref': "#/definitions/User"
                         }
                     }
                 }
             },
             'put': {
                 'tags': [
-                    'Usuario'
+                    'User'
                 ],
                 'summary': 'Update user with given username',
                 'parameters': [
@@ -121,7 +121,7 @@ const swaggerDef = {
                         'description': 'user with updated properties',
                         'required': false,
                         'schema': {
-                            '$ref': '#definitions/Usuario'
+                            '$ref': '#definitions/User'
                         }
                     }
                 ],
@@ -133,7 +133,7 @@ const swaggerDef = {
             },
             'delete': {
                 'tags': [
-                    'Usuario'
+                    'User'
                 ],
                 'summary': 'Delete user with given username',
                 'parameters': [

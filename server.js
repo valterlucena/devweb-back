@@ -39,11 +39,11 @@ app.use(cors());
 
 let cards      = require('./src/cards/cardsRoutes'),
     disciplina = require('./src/disciplina/disciplinaRoutes'),
-    usuario    = require('./src/usuario/usuarioRoutes');
+    user    = require('./src/user/userRoutes');
 
 cards(app);
 disciplina(app);
-usuario(app);
+user(app);
 swagger(app);
 autenticacao(app);
 
