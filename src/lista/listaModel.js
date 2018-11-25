@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const DisciplinaSchema = new Schema({
-    nome: {
+const ListaSchema = new Schema({
+    titulo: {
         type: String,
         required: true
     },
-    descricao: String,
-    listas: {
+    cards: {
         type: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Lista'
+                ref: 'Card'
             }
-        ]
+        ],
+        default: []
     }
 });
 
-module.exports = mongoose.model('Disciplina', DisciplinaSchema);
+module.exports = mongoose.model('Lista', ListaSchema);
