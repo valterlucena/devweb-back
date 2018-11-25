@@ -2,7 +2,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 
 const swaggerDef = {
     'basePath': '/',
-    'host': 'localhost:3000',
+    'host': 'localhost:8000',
     'info': {
         'description': 'Sistema cujo objetivo é auxiliar na aprendizagem e revisão de conceitos utilizando flashcards.',
         'title': 'Flexes',
