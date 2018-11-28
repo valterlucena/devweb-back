@@ -11,5 +11,4 @@ module.exports = function (app) {
     .get(lista.getLista)
     .put(lista.atualizaLista)
     .delete(lista.deletaLista);
-
 }

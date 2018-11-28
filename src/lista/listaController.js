@@ -1,6 +1,7 @@
 'use strict';
 
 const Lista = require('./listaModel');
+const Card = require('../card/cardModel');
 
 exports.listaListas = function (req, res, next) {
   Lista.find((err, lista) => {
@@ -40,5 +41,5 @@ exports.deletaLista = function (req, res, next) {
     if (err)
       next(err);
     res.status(200).json({mensagem: "deletou toda"});
-  })
+  });
 };
