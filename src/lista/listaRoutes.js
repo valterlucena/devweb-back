@@ -11,4 +11,8 @@ module.exports = function (app) {
     .get(lista.getLista)
     .put(lista.atualizaLista)
     .delete(lista.deletaLista);
+
+  app.route('/lista/:listaId/card')
+    .post(lista.addCardLista)
+  
 }

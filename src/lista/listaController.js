@@ -43,3 +43,26 @@ exports.deletaLista = function (req, res, next) {
     res.status(200).json({mensagem: "deletou toda"});
   });
 };
+
+exports.addCardLista = function (req, res, next) {
+  console.log(req.body);
+  let card = new Card({
+    termo: req.body.termo,
+    definicao: req.body.definicao
+  })
+  
+  card.save(function(err, card) {
+    if (err)
+      next(err);
+    Lista.findById(req.params.listaId, function(err, lista) {
+      if (err)
+        next(err);
+      lista.cards.push(card._id);
+      lista.save(function(err) {
+        if (err)
+          next(err);
+        res.json(lista);
+      });
+    });
+  });
+}
