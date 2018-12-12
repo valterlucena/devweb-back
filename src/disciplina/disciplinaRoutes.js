@@ -11,5 +11,11 @@ module.exports = function (app) {
     .get(disciplina.getDisciplina)
     .put(disciplina.atualizaDisciplina)
     .delete(disciplina.deletaDisciplina);
+  
+  app.route('/disciplina/:disciplinaId/lista')
+    .post(disciplina.addListaDisciplina);
+  
+  app.route('/disciplina/:disciplinaId/lista/:listaId')
+    .delete(disciplina.removeListaDisciplina);
 
 }

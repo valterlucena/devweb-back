@@ -13,6 +13,9 @@ module.exports = function (app) {
     .delete(lista.deletaLista);
 
   app.route('/lista/:listaId/card')
-    .post(lista.addCardLista)
+    .post(lista.addCardLista);
+  
+  app.route('/lista/:listaId/card/:cardId')
+    .delete(lista.removeCardLista);
   
 }

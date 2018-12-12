@@ -45,7 +45,6 @@ exports.deletaLista = function (req, res, next) {
 };
 
 exports.addCardLista = function (req, res, next) {
-  console.log(req.body);
   let card = new Card({
     termo: req.body.termo,
     definicao: req.body.definicao
@@ -58,6 +57,23 @@ exports.addCardLista = function (req, res, next) {
       if (err)
         next(err);
       lista.cards.push(card._id);
+      lista.save(function(err) {
+        if (err)
+          next(err);
+        res.json(lista);
+      });
+    });
+  });
+}
+
+exports.removeCardLista = function (req, res, next) {
+  Card.findByIdAndDelete(req.params.cardId, function(err, card) {
+    if (err)
+      next(err);
+    Lista.findById(req.params.listaId, function(err, lista) {
+      if (err)
+        next(err);
+      lista.cards.pull(card._id);
       lista.save(function(err) {
         if (err)
           next(err);
