@@ -55,7 +55,7 @@ exports.addCardLista = function (req, res, next) {
       next(err);
     Lista.findById(req.params.listaId, function(err, lista) {
       if (err)
-        next(err);
+        next(err); 
       lista.cards.push(card._id);
       lista.save(function(err) {
         if (err)
